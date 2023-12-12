@@ -35,10 +35,19 @@ public class PairMatchingController {
             if (function == Function.PAIR_MATCHING) {
                 pairMatching(crews);
             }
+            if (function == Function.PAIR_VIEW) {
+                pairView();
+            }
             if (function == Function.QUIT) {
                 break;
             }
         }
+    }
+
+    private void pairView() {
+        Target target = repeatUntilSuccess(this::selectTarget);
+        List<MatchingResult> matchingResults = matchingHistory.findMatchingByTarget(target);
+        outputView.printResult(matchingResults);
     }
 
     public void pairMatching(Crews crews) {

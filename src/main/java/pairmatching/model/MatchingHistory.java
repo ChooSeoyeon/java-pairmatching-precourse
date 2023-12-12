@@ -34,4 +34,14 @@ public class MatchingHistory {
         }
         return matchingResults;
     }
+
+    public List<MatchingResult> findMatchingByTarget(Target target) {
+        List<MatchingResult> matchingResults = new ArrayList<>();
+        for (Map.Entry<MatchingResult, Target> entry : matching.entrySet()) {
+            if (entry.getValue().equals(target)) {
+                matchingResults.add(entry.getKey());
+            }
+        }
+        return matchingResults;
+    }
 }

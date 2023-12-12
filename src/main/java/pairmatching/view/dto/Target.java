@@ -30,4 +30,16 @@ public class Target {
     public boolean isSameCourseAndLevel(Course course, Level level) {
         return this.course == course && this.level == level;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Target)) {
+            return false;
+        }
+        Target target = (Target) o;
+        return course == target.course && level == target.level && mission == target.mission;
+    }
 }
