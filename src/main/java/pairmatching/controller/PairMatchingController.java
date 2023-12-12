@@ -44,26 +44,27 @@ public class PairMatchingController {
     public void pairMatching(Crews crews) {
         Target target = repeatUntilSuccess(this::selectTarget);
         if (matchingHistory.isExistByCourseAndLevel(target.getCourse(), target.getLevel())) {
-            if (repeatUntilSuccess(this::selectReMatching)) {
-                createPreviousMatchingResults(target);
+            if (!repeatUntilSuccess(this::selectReMatching)) {
+                List<MatchingResult> matchingResults = createPreviousMatchingResults(target);
+                outputView.printResult(matchingResults);
+                return;
             }
-            return;
         }
-        createNewMatchingResults(crews, target);
+        List<MatchingResult> matchingResults = createNewMatchingResults(crews, target);
+        outputView.printResult(matchingResults);
     }
 
-    public void createNewMatchingResults(Crews crews, Target target) {
+    public List<MatchingResult> createNewMatchingResults(Crews crews, Target target) {
         MatchingManager matchingManager = new MatchingManager(crews);
         List<MatchingResult> matchingResults = matchingManager.doMatching(target);
-        outputView.printResult(matchingResults);
         for (MatchingResult matchingResult : matchingResults) {
-            matchingHistory.addMatchingHistory(matchingResult, target);
+            matchingHistory.addMatching(matchingResult, target);
         }
+        return matchingResults;
     }
 
     public List<MatchingResult> createPreviousMatchingResults(Target target) {
-        return null;
-        // return matchingHistory.getMatchingResults(target);
+        return matchingHistory.findMatchingByCourseAndLevel(target.getCourse(), target.getLevel());
     }
 
     public boolean selectReMatching() {
