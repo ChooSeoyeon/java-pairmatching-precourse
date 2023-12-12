@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.function.Supplier;
 import pairmatching.model.Crew;
 import pairmatching.model.Crews;
+import pairmatching.model.MatchingManager;
+import pairmatching.model.dto.MatchingResult;
 import pairmatching.model.enums.Course;
 import pairmatching.model.enums.Function;
 import pairmatching.view.InputView;
@@ -27,6 +29,11 @@ public class PairMatchingController {
         Crews crews = settingCrews();
         Function function = repeatUntilSuccess(this::selectFunction);
         Target target = repeatUntilSuccess(this::selectTarget);
+
+        // TODO : target 1일 때
+        MatchingManager matchingManager = new MatchingManager(crews);
+        List<MatchingResult> matchingResults = matchingManager.doMatching(target);
+        System.out.println("매칭 결과 = " + matchingResults); // TODO 출력
     }
 
     private Crews settingCrews() throws IOException {
@@ -49,12 +56,12 @@ public class PairMatchingController {
     }
 
     private Function selectFunction() {
-        System.out.println("기능을 선택하세요."); // TODO
+        System.out.println("기능을 선택하세요."); // TODO 출력
         return inputView.readFunction();
     }
 
     private Target selectTarget() {
-        System.out.println("과정, 레벨, 미션을 선택하세요."); // TODO
+        System.out.println("과정, 레벨, 미션을 선택하세요."); // TODO 출력
         return inputView.readTarget();
     }
 
