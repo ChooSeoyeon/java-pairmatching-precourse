@@ -45,7 +45,7 @@ public class PairMatchingController {
         Target target = repeatUntilSuccess(this::selectTarget);
         MatchingManager matchingManager = new MatchingManager(crews);
         List<MatchingResult> matchingResults = matchingManager.doMatching(target);
-        System.out.println("매칭 결과 = " + matchingResults); // TODO 출력
+        outputView.printResult(matchingResults);
         for (MatchingResult matchingResult : matchingResults) {
             matchingHistory.addMatchingHistory(matchingResult, target);
         }
