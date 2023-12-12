@@ -38,4 +38,19 @@ public class InputView {
             throw new PairIllegalArgumentException(ErrorCode.NON_FORMAT_COURSE);
         }
     }
+
+    public Boolean readRematching() {
+        String input = Console.readLine();
+        return parseRematching(input);
+    }
+
+    public boolean parseRematching(String input) {
+        if (input.equals("네")) {
+            return true;
+        }
+        if (input.equals("아니오")) {
+            return false;
+        }
+        throw new PairIllegalArgumentException(ErrorCode.NON_FORMAT_REMATCHING);
+    }
 }

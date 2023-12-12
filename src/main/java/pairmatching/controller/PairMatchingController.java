@@ -43,12 +43,32 @@ public class PairMatchingController {
 
     public void pairMatching(Crews crews) {
         Target target = repeatUntilSuccess(this::selectTarget);
+        if (matchingHistory.isExistByCourseAndLevel(target.getCourse(), target.getLevel())) {
+            if (repeatUntilSuccess(this::selectReMatching)) {
+                createPreviousMatchingResults(target);
+            }
+            return;
+        }
+        createNewMatchingResults(crews, target);
+    }
+
+    public void createNewMatchingResults(Crews crews, Target target) {
         MatchingManager matchingManager = new MatchingManager(crews);
         List<MatchingResult> matchingResults = matchingManager.doMatching(target);
         outputView.printResult(matchingResults);
         for (MatchingResult matchingResult : matchingResults) {
             matchingHistory.addMatchingHistory(matchingResult, target);
         }
+    }
+
+    public List<MatchingResult> createPreviousMatchingResults(Target target) {
+        return null;
+        // return matchingHistory.getMatchingResults(target);
+    }
+
+    public boolean selectReMatching() {
+        outputView.printRematchingPrompt();
+        return inputView.readRematching();
     }
 
     private Crews settingCrews() throws IOException {
