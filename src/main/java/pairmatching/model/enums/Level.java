@@ -24,4 +24,9 @@ public enum Level {
         }
         throw new PairIllegalArgumentException(ErrorCode.NOT_FOUND_LEVEL);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -21,4 +21,9 @@ public enum Course {
         }
         throw new PairIllegalArgumentException(ErrorCode.NOT_FOUND_COURSE);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -29,4 +29,13 @@ public enum Mission {
         }
         throw new PairIllegalArgumentException(ErrorCode.NOT_FOUND_MISSION);
     }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -7,7 +7,7 @@ public enum Function {
     PAIR_MATCHING("1", "페어 매칭"),
     PAIR_VIEW("2", "페어 조회"),
     PAIR_RESET("3", "페어 초기화"),
-    QUIT("q", "종료");
+    QUIT("Q", "종료");
 
     private final String key;
     private final String description;

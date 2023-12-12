@@ -30,18 +30,25 @@ public class PairMatchingController {
 
     public void run() throws IOException {
         Crews crews = settingCrews();
-        Function function = repeatUntilSuccess(this::selectFunction);
-        Target target = repeatUntilSuccess(this::selectTarget);
+        while (true) {
+            Function function = repeatUntilSuccess(this::selectFunction);
+            if (function == Function.PAIR_MATCHING) {
+                pairMatching(crews);
+            }
+            if (function == Function.QUIT) {
+                break;
+            }
+        }
+    }
 
-        // TODO : target 1일 때
+    public void pairMatching(Crews crews) {
+        Target target = repeatUntilSuccess(this::selectTarget);
         MatchingManager matchingManager = new MatchingManager(crews);
         List<MatchingResult> matchingResults = matchingManager.doMatching(target);
         System.out.println("매칭 결과 = " + matchingResults); // TODO 출력
-
         for (MatchingResult matchingResult : matchingResults) {
             matchingHistory.addMatchingHistory(matchingResult, target);
         }
-
     }
 
     private Crews settingCrews() throws IOException {
@@ -64,12 +71,12 @@ public class PairMatchingController {
     }
 
     private Function selectFunction() {
-        System.out.println("기능을 선택하세요."); // TODO 출력
+        outputView.printFunctionPrompt();
         return inputView.readFunction();
     }
 
     private Target selectTarget() {
-        System.out.println("과정, 레벨, 미션을 선택하세요."); // TODO 출력
+        outputView.printTargetPrompt();
         return inputView.readTarget();
     }
 
