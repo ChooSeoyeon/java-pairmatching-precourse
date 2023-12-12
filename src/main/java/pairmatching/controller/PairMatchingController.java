@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import pairmatching.model.Crew;
 import pairmatching.model.Crews;
+import pairmatching.model.MatchingHistory;
 import pairmatching.model.MatchingManager;
 import pairmatching.model.dto.MatchingResult;
 import pairmatching.model.enums.Course;
@@ -19,10 +20,12 @@ import pairmatching.view.dto.Target;
 public class PairMatchingController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final MatchingHistory matchingHistory;
 
     public PairMatchingController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.matchingHistory = new MatchingHistory();
     }
 
     public void run() throws IOException {
@@ -34,6 +37,11 @@ public class PairMatchingController {
         MatchingManager matchingManager = new MatchingManager(crews);
         List<MatchingResult> matchingResults = matchingManager.doMatching(target);
         System.out.println("매칭 결과 = " + matchingResults); // TODO 출력
+
+        for (MatchingResult matchingResult : matchingResults) {
+            matchingHistory.addMatchingHistory(matchingResult, target);
+        }
+
     }
 
     private Crews settingCrews() throws IOException {

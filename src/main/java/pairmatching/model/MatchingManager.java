@@ -18,9 +18,7 @@ public class MatchingManager {
     public List<MatchingResult> doMatching(Target target) {
         List<String> crewNames = shuffleCrewNamesWithCourse(target.getCourse());
         List<MatchingResult> matchingResults = createPairs(crewNames);
-
         handleOddMember(crewNames, matchingResults);
-
         return matchingResults;
     }
 
