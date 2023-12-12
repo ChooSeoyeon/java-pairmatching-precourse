@@ -26,4 +26,8 @@ public class Target {
     public Mission getMission() {
         return mission;
     }
+
+    public boolean isSameCourseAndLevel(Course course, Level level) {
+        return this.course == course && this.level == level;
+    }
 }
