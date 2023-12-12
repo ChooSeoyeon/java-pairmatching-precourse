@@ -75,11 +75,11 @@
 
 ### PairIllegalArgumentException
 
-- [ ] 예외 메시지를 담아 외부 예외를 커스텀한다.
+- [x] 예외 메시지를 담아 외부 예외를 커스텀한다.
 
 ### PairIllegalStateException
 
-- [ ] 예외 메시지를 담아 내부 예외를 커스텀한다.
+- [x] 예외 메시지를 담아 내부 예외를 커스텀한다.
 
 # 부록
 
