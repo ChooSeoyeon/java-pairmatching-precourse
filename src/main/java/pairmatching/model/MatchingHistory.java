@@ -44,4 +44,8 @@ public class MatchingHistory {
         }
         return matchingResults;
     }
+
+    public void deleteAll() {
+        matching.clear();
+    }
 }

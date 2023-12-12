@@ -38,10 +38,18 @@ public class PairMatchingController {
             if (function == Function.PAIR_VIEW) {
                 pairView();
             }
+            if (function == Function.PAIR_RESET) {
+                pairReset();
+            }
             if (function == Function.QUIT) {
                 break;
             }
         }
+    }
+
+    private void pairReset() {
+        matchingHistory.deleteAll();
+        outputView.printResetMessage();
     }
 
     private void pairView() {
