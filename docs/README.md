@@ -71,7 +71,7 @@
 
 ### ErrorCode → Enum
 
-- [ ] 예외 메시지를 제공한다.
+- [x] 예외 메시지를 제공한다.
 
 ### PairIllegalArgumentException
 
