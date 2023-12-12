@@ -1,5 +1,8 @@
 package pairmatching.model.enums;
 
+import pairmatching.exception.ErrorCode;
+import pairmatching.exception.PairIllegalArgumentException;
+
 public enum Mission {
     CAR_RACING(Level.LEVEL1, "자동차경주"),
     LOTTERY(Level.LEVEL1, "로또"),
@@ -16,5 +19,14 @@ public enum Mission {
     Mission(Level level, String name) {
         this.level = level;
         this.name = name;
+    }
+
+    public static Mission findByName(String name) {
+        for (Mission mission : Mission.values()) {
+            if (mission.name.equals(name)) {
+                return mission;
+            }
+        }
+        throw new PairIllegalArgumentException(ErrorCode.NOT_FOUND_MISSION);
     }
 }
